@@ -1,0 +1,231 @@
+<!-- <mat-card class="mat-elevation-z5">
+  <mat-card-header class="d-flex align-content-around flex-wrap">
+    <mat-card-title   >Mexico City's weather</mat-card-title>
+    <mat-card-subtitle>Today: </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="flex-row">
+      <div class="temp">
+        <span class="big-text">{{(temp).toFixed(2)}} ºC</span>
+        <span>Feels like </span>
+        <span>{{(feels_like).toFixed(2)}} ºC</span>
+      </div>
+      <div class="outlook">
+        <span>{{description}}</span>
+        <img [src]="iconUrl" class="image" />
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" class="top-bar"> </mat-progress-bar>
+  </mat-card-footer>
+</mat-card> -->
+
+<div class="row">
+    <div class="col-lg-4 col-md-12">
+        <div class="card weather2">
+            <div class="body city-selected">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="city"><span>City:</span> {{dataWeather?.[1]?.cityName}}</div>
+                        <div class="night">{{dateESP.dayName}} {{dateESP.month}} {{dateESP.day}} {{dateESP.year}} </div>
+                    </div>
+                    <div class="info col-7">
+                        <div class="temp">
+                            <h2>{{(dataWeather?.[1]?.temp).toFixed(1)}}°</h2>
+                        </div>
+                    </div>
+                    <div class="icon col-5">
+                        <img [src]="dataWeather?.[1]?.iconUrl" class="image" />
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped m-b-0">
+                <tbody>
+                    <tr>
+                        <td>Amanecer</td>
+                        <td class="font-medium">{{dataWeather?.[1]?.sunrise}}</td>
+                    </tr>
+                    <tr>
+                        <td>Atardecer</td>
+                        <td class="font-medium">{{dataWeather?.[1]?.sunset}}</td>
+                    </tr>
+                    <tr>
+                        <td>Presión</td>
+                        <td class="font-medium">{{dataWeather?.[1]?.pressure}} hPa</td>
+                    </tr>
+                    <tr>
+                        <td>Humedad</td>
+                        <td class="font-medium">{{dataWeather?.[1]?.humidity}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Velocidad Viento</td>
+                        <td class="font-medium">{{dataWeather?.[1]?.wind_speed}} m/s</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="week" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item text-center active">
+                        <div class="col-12">
+                            <ul class="row days-list list-unstyled">
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[0].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[0].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[0].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[1].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[1].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[1].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[2].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[2].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[2].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="carousel-item text-center">
+                        <div class="col-12">
+                            <ul class="row days-list list-unstyled">
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[3].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[3].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[3].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[4].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[4].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[4].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[5].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[5].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[5].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="carousel-item text-center">
+                        <div class="col-12">
+                            <ul class="row days-list list-unstyled">
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[6].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[6].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[3].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                                <li class="day col-4">
+                                    <p>{{ UnixToJS(dataWeather?.[1]?.daily[7].dt).date}}</p>
+                                    <p>{{ dataWeather?.[1]?.daily[7].temp.day}}</p>
+                                    <div class="weatherIcon"><img src="{{'https://openweathermap.org/img/wn/' + dataWeather?.[1]?.daily[4].weather[0].icon + '@2x.png'}}" class="image" /></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+
+        <div class="card weather5">
+            <div class="widget">
+                <div class="weatherIcon"><img [src]="dataWeather?.[0]?.iconUrl" class="image" /></div>
+                <div class="weatherInfo">
+                    <div class="temperature"><span>{{(dataWeather?.[0]?.temp).toFixed(1)}}</span></div>
+                    <div class="description">
+                        <div class="weatherCondition">{{dataWeather?.[0]?.description.toUpperCase()}}</div>
+                        <div class="place">{{dataWeather?.[0]?.cityName}}, {{dataWeather?.[0]?.country}} </div>
+                    </div>
+                </div>
+                <div class="date">{{dateESP.day}} {{dateESP.month}}</div>
+            </div>
+        </div>
+        <div class="card weather6 l-amber">
+            <div class="body">
+                <div class="p-15">
+                    Sensación
+                    <div class="temp">{{(dataWeather?.[0]?.feels_like).toFixed(1)}}°<span>C</span>
+                        <img [src]="dataWeather?.[0]?.iconUrl" class="image" />
+                    </div>
+                </div>
+                <p>Saturday 12 May</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="card weather3">
+            <div class="top">
+                <div class="wrapper">
+                    <h2 class="heading">Dormitorio</h2>
+                    <h3 class="location">Sensor</h3>
+                    <p class="temp">
+                        <span class="temp-value">{{(roomTemp).toFixed(2)}}</span>
+                        <span class="deg">º</span>
+                        <a href="javascript:void(0);"><span class="temp-type">C</span></a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- <div class="col-lg-6 col-md-12">
+        <div class="card weather">
+            <div class="header">
+                <h2>Weather</h2>
+            </div>
+            <div class="body">
+                <div class="city">
+                    <span>sky is clear</span>
+                    <h3>New York</h3>
+                    <i class="wi wi-day-sunny-overcast"></i>
+                </div>
+                <ul class="row days list-unstyled m-b-0">
+                    <li>
+                        <h5>SUN</h5>
+                        <i class="wi wi-rain"></i>
+                        <span class="degrees">77</span>
+                    </li>
+                    <li>
+                        <h5>MON</h5>
+                        <i class="wi wi-cloudy"></i>
+                        <span class="degrees">81</span>
+                    </li>
+                    <li>
+                        <h5>TUE</h5>
+                        <i class="wi wi-rain-wind"></i>
+                        <span class="degrees">82</span>
+                    </li>
+                    <li>
+                        <h5>WED</h5>
+                        <i class="wi wi-lightning"></i>
+                        <span class="degrees">82</span>
+                    </li>
+                    <li>
+                        <h5>THU</h5>
+                        <i class="wi wi-day-cloudy-gusts"></i>
+                        <span class="degrees">81</span>
+                    </li>
+                    <li>
+                        <h5>FRI</h5>
+                        <i class="wi wi-day-showers"></i>
+                        <span class="degrees">67</span>
+                    </li>
+                    <li>
+                        <h5>SAT</h5>
+                        <i class="wi wi-day-snow"></i>
+                        <span class="degrees">81</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+</div>
